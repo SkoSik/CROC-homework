@@ -1,5 +1,10 @@
 package crochomework.exception;
 
+/**
+ * Класс Pawn является наследником Figure и является прототипом шахматной пешки
+ *
+ * @author Slobodyan Ilya (SkoSik)
+ */
 public class Pawn extends Figure {
 
     /**
@@ -35,6 +40,12 @@ public class Pawn extends Figure {
         }
     }
 
+    /**
+     * Сделать ход
+     *
+     * @param x координата X
+     * @param y координата Y
+     */
     public void makeMove(int x, int y) {
         makeMove(new Cage(x, y));
     }

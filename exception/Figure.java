@@ -33,6 +33,12 @@ public abstract class Figure {
      */
     public abstract void makeMove(Cage cage);
 
+    /**
+     * Сделать ход
+     *
+     * @param x координата X
+     * @param y координата Y
+     */
     public abstract void makeMove(int x, int y);
 
     public String getName() {
