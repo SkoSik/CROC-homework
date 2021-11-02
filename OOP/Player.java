@@ -31,8 +31,7 @@ public abstract class Player {
      *
      * @param carrier Носитель
      */
-    public void insertCarrier(MusicCarrier carrier) {
-    }
+    public abstract void insertCarrier(MusicCarrier carrier);
 
     /**
      * Достать носитель из плеера
