@@ -50,8 +50,8 @@ public class Main {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         long current = System.currentTimeMillis();
         ExecutorService pool = Executors.newFixedThreadPool(10);
-        List<MyCallable> tasks = new ArrayList<>();
-        //Создаю лист задач из количества потоков, равных количеству символов в строке, чтобы добиться максимально возможной скорости выполнения
+		//Создаю лист задач
+        List<MyCallable> tasks = new ArrayList<>();        
         for (int i = 0; i < INPUT_STRING.length(); i++) {
             tasks.add(new MyCallable(i));
         }
