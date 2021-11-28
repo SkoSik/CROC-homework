@@ -1,0 +1,30 @@
+[
+	{
+		"id": 1,
+		"seller": 1,
+		"product": 1,
+		"numberOfSold": 4,
+		"date": "10.12.2020"
+	},	
+	{
+		"id": 2,
+		"seller": 3,
+		"product": 2,
+		"numberOfSold": 6,
+		"date": "13.12.2020"
+	},			
+	{
+		"id": 3,
+		"seller": 2,
+		"product": 3,
+		"numberOfSold": 5,
+		"date": "11.12.2020"
+	},			
+	{
+		"id": 4,
+		"seller": 4,
+		"product": 1,
+		"numberOfSold": 3,
+		"date": "10.12.2020"
+	}		
+]

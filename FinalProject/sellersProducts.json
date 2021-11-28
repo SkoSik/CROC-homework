@@ -1,0 +1,26 @@
+[
+	{
+		"seller": 1,
+		"product": 1,
+		"cost": 300,
+		"amount": 10
+	},	
+	{
+		"seller": 2,
+		"product": 3,
+		"cost": 230,
+		"amount": 5
+	},		
+	{
+		"seller": 3,
+		"product": 2,
+		"cost": 435,
+		"amount": 4
+	},		
+	{
+		"seller": 4,
+		"product": 1,
+		"cost": 34,
+		"amount": 7
+	}	
+]
