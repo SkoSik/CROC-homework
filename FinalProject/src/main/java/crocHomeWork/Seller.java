@@ -1,10 +1,15 @@
 package crocHomeWork;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Objects;
 
 public class Seller {
+    @SerializedName("id")
     int id;
+    @SerializedName("surname")
     String surname;
+    @SerializedName("name")
     String name;
 
     Seller(int id, String surname, String name) {

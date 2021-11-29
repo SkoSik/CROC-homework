@@ -1,5 +1,7 @@
 package crocHomeWork;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
@@ -7,10 +9,15 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Sale {
+    @SerializedName("id")
     int id;
+    @SerializedName("seller")
     int seller;
+    @SerializedName("product")
     int product;
+    @SerializedName("numberOfSold")
     int numberOfSold;
+    @SerializedName("date")
     Date date;
 
     Sale(int id, int seller, int product, int numberOfSold, Date date) {
@@ -29,7 +36,11 @@ public class Sale {
         return numberOfSold;
     }
 
-    public String getDate() {
+    public Date getDate() {
+        return date;
+    }
+
+    public static String getNormDate(Date date) {
         DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
         return df.format(date);
     }

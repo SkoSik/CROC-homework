@@ -1,9 +1,13 @@
 package crocHomeWork;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Objects;
 
 public class Product {
+    @SerializedName("id")
     int id;
+    @SerializedName("name")
     String name;
 
     Product(int id, String name) {

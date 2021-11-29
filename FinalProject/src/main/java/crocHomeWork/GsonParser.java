@@ -2,56 +2,38 @@ package crocHomeWork;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
-import java.lang.reflect.Type;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
+/**
+ * GsonParser - JSON парсер на основе библиотеки GSON
+ */
 public class GsonParser {
     Gson gson = new GsonBuilder().setDateFormat("dd.MM.yyyy").create();
-    FileReader reader;
 
-
-    public List<Product> parseProducts() throws FileNotFoundException {
-        reader = new FileReader("products.json");
-        return Arrays.asList(gson.fromJson(reader, Product[].class));
+    /**
+     * Парсинг json файла
+     *
+     * @param clazz - класс, лист экземляров которого будет создан на основании их json представлений
+     * @param path  - путь до файла json
+     */
+    public <T> List<T> parse(Class<T[]> clazz, String path) throws FileNotFoundException {
+        return Arrays.asList(gson.fromJson(new FileReader(path), clazz));
     }
 
-    public List<Seller> parseSellers() throws FileNotFoundException {
-        reader = new FileReader("sellers.json");
-        return Arrays.asList(gson.fromJson(reader, Seller[].class));
-    }
-
-    public List<SellerProduct> parseSellerProduct() throws FileNotFoundException {
-        reader = new FileReader("sellersProducts.json");
-        return Arrays.asList(gson.fromJson(reader, SellerProduct[].class));
-    }
-
-    public List<Sale> parseSales() throws FileNotFoundException {
-        reader = new FileReader("sales.json");
-        return Arrays.asList(gson.fromJson(reader, Sale[].class));
-    }
-
-    public void writeNumberOfSoldProducts(HashMap<Integer, Integer> results) throws FileNotFoundException {
-        Type gsonType = new TypeToken<HashMap>() {
-        }.getType();
-        String result = gson.toJson(results, gsonType);
-        PrintWriter fout = new PrintWriter("numberOfSoldProducts.json");
-        fout.println(result);
-        fout.close();
-    }
-
-    public void writeDistributionSalesByDate(HashMap<String, Integer> results) throws FileNotFoundException {
-        Type gsonType = new TypeToken<HashMap>() {
-        }.getType();
-        String result = gson.toJson(results, gsonType);
-        PrintWriter fout = new PrintWriter("distributionSalesByDate.json");
-        fout.println(result);
-        fout.close();
+    /**
+     * Запись json файла
+     *
+     * @param results - результаты обработки
+     * @param path    - путь до файла json
+     */
+    public <T> void write(LinkedHashMap<T, Integer> results, String path) throws FileNotFoundException {
+        String result = gson.toJson(results);
+        PrintWriter printWriter = new PrintWriter(path);
+        printWriter.println(result);
+        printWriter.close();
     }
 }

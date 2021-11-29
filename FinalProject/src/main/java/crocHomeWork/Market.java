@@ -15,27 +15,39 @@ public class Market {
         this.sales = sales;
     }
 
-    public HashMap<Integer, Integer> numberOfProductsSold() {
-        HashMap<Integer, Integer> results = new HashMap<>();
-        Collections.sort(sales, Sale.compareByProduct);
-        int tmpid = sales.get(0).getProduct(), sum = 0;
+    /**
+     * Задание #1 - Для каждого товара вывести в файл общее количество проданных товаров этого типа
+     * <p>
+     * Собираем и вовзвращаем LinkedHashMap результатов в виде пар (ID продукта - Кол-во проданных товаров)
+     */
+    public LinkedHashMap<Integer, Integer> numberOfProductsSold() {
+        LinkedHashMap<Integer, Integer> results = new LinkedHashMap<>();
+        sales.sort(Sale.compareByProduct);
+        int tempId = sales.get(0).getProduct(), sum = 0;
         for (Sale sale : sales) {
-            if (tmpid != sale.getProduct()) {
-                results.put(tmpid, sum);
-                tmpid = sale.getProduct();
+            if (tempId != sale.getProduct()) {
+                results.put(tempId, sum);
+                tempId = sale.getProduct();
                 sum = 0;
             }
             sum += sale.getNumberOfSold();
         }
-        results.put(tmpid, sum);
+        results.put(tempId, sum);
         return results;
     }
 
-    public HashMap<String, Integer> distributionSalesByDate() {
-        HashMap<String, Integer> results = new HashMap<>();
-        Collections.sort(sales, Sale.compareByDate);
+    /**
+     * Задание #2 - Вывести в файл распределение общего количества продаж по датам
+     * <p>
+     * Собираем TreeMap результатов в виде пар (Дата - Кол-во проданных товаров)
+     * Создаём, заполняем и вовзвращаем LinkedHashMap результатов в виде пар (Дата (В нужном формате) - Кол-во проданных товаров)
+     */
+    public LinkedHashMap<String, Integer> distributionSalesByDate() {
+        //Используем TreeMap, чтобы отсортировать даты
+        TreeMap<Date, Integer> results = new TreeMap<>();
+        sales.sort(Sale.compareByDate);
         int sum = 0;
-        String date = sales.get(0).getDate();
+        Date date = sales.get(0).getDate();
         for (Sale sale : sales) {
             if (!date.equals(sale.getDate())) {
                 results.put(date, sum);
@@ -45,6 +57,13 @@ public class Market {
             sum += sale.getNumberOfSold();
         }
         results.put(date, sum);
-        return results;
+
+        LinkedHashMap<String, Integer> normResults = new LinkedHashMap<>();
+
+        results.entrySet()
+                .stream()
+                .forEach(k -> normResults.put(Sale.getNormDate(k.getKey()), k.getValue()));
+
+        return normResults;
     }
 }

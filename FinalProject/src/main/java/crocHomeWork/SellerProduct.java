@@ -1,11 +1,17 @@
 package crocHomeWork;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Objects;
 
 public class SellerProduct {
+    @SerializedName("seller")
     int seller;
+    @SerializedName("product")
     int product;
+    @SerializedName("cost")
     int cost;
+    @SerializedName("amount")
     int amount;
 
     SellerProduct(int seller, int product, int cost, int amount) {

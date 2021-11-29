@@ -26,5 +26,12 @@
 		"product": 1,
 		"numberOfSold": 3,
 		"date": "10.12.2020"
+	},			
+	{
+		"id": 5,
+		"seller": 2,
+		"product": 3,
+		"numberOfSold": 7,
+		"date": "09.01.2021"
 	}		
 ]
