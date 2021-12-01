@@ -12,32 +12,32 @@ public class Sale {
     @SerializedName("id")
     int id;
     @SerializedName("seller")
-    int seller;
+    int sellerId;
     @SerializedName("product")
-    int product;
+    int productId;
     @SerializedName("numberOfSold")
     int numberOfSold;
     @SerializedName("date")
-    Date date;
+    Date dateSold;
 
     Sale(int id, int seller, int product, int numberOfSold, Date date) {
         this.id = id;
-        this.seller = seller;
-        this.product = product;
+        this.sellerId = seller;
+        this.productId = product;
         this.numberOfSold = numberOfSold;
-        this.date = date;
+        this.dateSold = date;
     }
 
-    public int getProduct() {
-        return product;
+    public int getProductId() {
+        return productId;
     }
 
     public int getNumberOfSold() {
         return numberOfSold;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getDateSold() {
+        return dateSold;
     }
 
     public static String getNormDate(Date date) {
@@ -48,10 +48,10 @@ public class Sale {
     public String toString() {
         return "Sale{" +
                 "id=" + id +
-                ", seller=" + seller +
-                ", product=" + product +
+                ", seller=" + sellerId +
+                ", product=" + productId +
                 ", numberOfSold=" + numberOfSold +
-                ", date=" + date +
+                ", date=" + dateSold +
                 '}';
     }
 
@@ -59,22 +59,22 @@ public class Sale {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Sale sale = (Sale) o;
-        return id == sale.id && seller == sale.seller && product == sale.product && numberOfSold == sale.numberOfSold && Objects.equals(date, sale.date);
+        return id == sale.id && sellerId == sale.sellerId && productId == sale.productId && numberOfSold == sale.numberOfSold && Objects.equals(dateSold, sale.dateSold);
     }
 
     public int hashCode() {
-        return Objects.hash(id, seller, product, numberOfSold, date);
+        return Objects.hash(id, sellerId, productId, numberOfSold, dateSold);
     }
 
     public static Comparator<Sale> compareByProduct = new Comparator<Sale>() {
         public int compare(Sale o1, Sale o2) {
-            return o1.getProduct() - o2.getProduct();
+            return o1.getProductId() - o2.getProductId();
         }
     };
 
     public static Comparator<Sale> compareByDate = new Comparator<Sale>() {
         public int compare(Sale o1, Sale o2) {
-            return o1.getDate().compareTo(o2.getDate());
+            return o1.getDateSold().compareTo(o2.getDateSold());
         }
     };
 }

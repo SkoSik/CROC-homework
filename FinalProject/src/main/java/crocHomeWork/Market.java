@@ -23,11 +23,11 @@ public class Market {
     public LinkedHashMap<Integer, Integer> numberOfProductsSold() {
         LinkedHashMap<Integer, Integer> results = new LinkedHashMap<>();
         sales.sort(Sale.compareByProduct);
-        int tempId = sales.get(0).getProduct(), sum = 0;
+        int tempId = sales.get(0).getProductId(), sum = 0;
         for (Sale sale : sales) {
-            if (tempId != sale.getProduct()) {
+            if (tempId != sale.getProductId()) {
                 results.put(tempId, sum);
-                tempId = sale.getProduct();
+                tempId = sale.getProductId();
                 sum = 0;
             }
             sum += sale.getNumberOfSold();
@@ -47,11 +47,11 @@ public class Market {
         TreeMap<Date, Integer> results = new TreeMap<>();
         sales.sort(Sale.compareByDate);
         int sum = 0;
-        Date date = sales.get(0).getDate();
+        Date date = sales.get(0).getDateSold();
         for (Sale sale : sales) {
-            if (!date.equals(sale.getDate())) {
+            if (!date.equals(sale.getDateSold())) {
                 results.put(date, sum);
-                date = sale.getDate();
+                date = sale.getDateSold();
                 sum = 0;
             }
             sum += sale.getNumberOfSold();

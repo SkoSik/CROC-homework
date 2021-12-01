@@ -30,7 +30,7 @@ public class GsonParser {
      * @param results - результаты обработки
      * @param path    - путь до файла json
      */
-    public <T> void write(LinkedHashMap<T, Integer> results, String path) throws FileNotFoundException {
+    public <T> void write(T results, String path) throws FileNotFoundException {
         String result = gson.toJson(results);
         PrintWriter printWriter = new PrintWriter(path);
         printWriter.println(result);
