@@ -20,7 +20,7 @@ public class Market {
     /**
      * Задание #1 - Для каждого товара вывести в файл общее количество проданных товаров этого типа
      * <p>
-     * Собираем и вовзвращаем LinkedHashMap результатов в виде пар (ID продукта - Кол-во проданных товаров)
+     * Используя Collectors.groupingBy группируем сделки по товарам и суммируем количество проданных товаров
      */
     public Map<Integer, Integer> numberOfProductsSold() {
         return sales.stream().collect(Collectors.groupingBy(Sale::getProductId, Collectors.summingInt(Sale::getNumberOfSold)));
@@ -29,8 +29,8 @@ public class Market {
     /**
      * Задание #2 - Вывести в файл распределение общего количества продаж по датам
      * <p>
-     * Собираем TreeMap результатов в виде пар (Дата - Кол-во проданных товаров)
-     * Создаём, заполняем и вовзвращаем LinkedHashMap результатов в виде пар (Дата (В нужном формате) - Кол-во проданных товаров)
+     * Используя Collectors.groupingBy группируем сделки по датам и суммируем количество проданных товаров
+     * Сортируем по дате и возвращаем LinkedHashMap, в которой даты преобразуем к строкам в нужной форме
      */
     public Map<String, Integer> distributionSalesByDate() {
         return sales.stream()
