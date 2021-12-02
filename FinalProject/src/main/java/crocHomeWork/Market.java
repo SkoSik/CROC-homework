@@ -1,6 +1,8 @@
 package crocHomeWork;
 
+import java.net.Inet4Address;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Market {
     List<Product> products;
@@ -20,20 +22,8 @@ public class Market {
      * <p>
      * Собираем и вовзвращаем LinkedHashMap результатов в виде пар (ID продукта - Кол-во проданных товаров)
      */
-    public LinkedHashMap<Integer, Integer> numberOfProductsSold() {
-        LinkedHashMap<Integer, Integer> results = new LinkedHashMap<>();
-        sales.sort(Sale.compareByProduct);
-        int tempId = sales.get(0).getProductId(), sum = 0;
-        for (Sale sale : sales) {
-            if (tempId != sale.getProductId()) {
-                results.put(tempId, sum);
-                tempId = sale.getProductId();
-                sum = 0;
-            }
-            sum += sale.getNumberOfSold();
-        }
-        results.put(tempId, sum);
-        return results;
+    public Map<Integer, Integer> numberOfProductsSold() {
+        return sales.stream().collect(Collectors.groupingBy(Sale::getProductId, Collectors.summingInt(Sale::getNumberOfSold)));
     }
 
     /**
@@ -42,28 +32,11 @@ public class Market {
      * Собираем TreeMap результатов в виде пар (Дата - Кол-во проданных товаров)
      * Создаём, заполняем и вовзвращаем LinkedHashMap результатов в виде пар (Дата (В нужном формате) - Кол-во проданных товаров)
      */
-    public LinkedHashMap<String, Integer> distributionSalesByDate() {
-        //Используем TreeMap, чтобы отсортировать даты
-        TreeMap<Date, Integer> results = new TreeMap<>();
-        sales.sort(Sale.compareByDate);
-        int sum = 0;
-        Date date = sales.get(0).getDateSold();
-        for (Sale sale : sales) {
-            if (!date.equals(sale.getDateSold())) {
-                results.put(date, sum);
-                date = sale.getDateSold();
-                sum = 0;
-            }
-            sum += sale.getNumberOfSold();
-        }
-        results.put(date, sum);
-
-        LinkedHashMap<String, Integer> normResults = new LinkedHashMap<>();
-
-        results.entrySet()
-                .stream()
-                .forEach(k -> normResults.put(Sale.getNormDate(k.getKey()), k.getValue()));
-
-        return normResults;
+    public Map<String, Integer> distributionSalesByDate() {
+        return sales.stream()
+                .collect(Collectors.groupingBy(Sale::getDateSold, Collectors.summingInt(Sale::getNumberOfSold)))
+                .entrySet().stream()
+                .sorted(Comparator.comparing(Map.Entry::getKey))
+                .collect(Collectors.toMap(k->Sale.getNormDate(k.getKey()), v -> v.getValue(),(a,b) -> a,LinkedHashMap::new));
     }
 }

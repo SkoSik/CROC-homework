@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Map;
 import java.util.Objects;
 
 public class Sale {
@@ -65,16 +66,4 @@ public class Sale {
     public int hashCode() {
         return Objects.hash(id, sellerId, productId, numberOfSold, dateSold);
     }
-
-    public static Comparator<Sale> compareByProduct = new Comparator<Sale>() {
-        public int compare(Sale o1, Sale o2) {
-            return o1.getProductId() - o2.getProductId();
-        }
-    };
-
-    public static Comparator<Sale> compareByDate = new Comparator<Sale>() {
-        public int compare(Sale o1, Sale o2) {
-            return o1.getDateSold().compareTo(o2.getDateSold());
-        }
-    };
 }
